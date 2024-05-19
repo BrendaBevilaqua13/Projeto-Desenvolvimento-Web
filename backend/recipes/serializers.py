@@ -5,3 +5,6 @@ class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model=Recipe
         fields=('id','title','description','slug','author','is_published','category')
+
+    category = serializers.StringRelatedField()
+    author = serializers.StringRelatedField()
