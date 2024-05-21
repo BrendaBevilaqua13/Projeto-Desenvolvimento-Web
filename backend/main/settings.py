@@ -44,9 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'recipes',
+    'rest_framework_simplejwt',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    
 ]
 
 MIDDLEWARE = [
@@ -155,5 +157,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK={
     'DEFAULT_PERMISSION_CLASSES':[
         'rest_framework.permissions.AllowAny',
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES':(
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+# Django project settings.py
+
+from datetime import timedelta
+...
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "BLACKLIST_AFTER_ROTATION": False,
+    "SIGNING_KEY": os.environ.get('SECRET_KEY_JWT','INSECURE'),
+    "JSON_ENCODER": None,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",
+    "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
+    "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",
+    "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
+    "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
+    "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
