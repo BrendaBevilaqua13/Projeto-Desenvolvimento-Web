@@ -18,6 +18,11 @@ class RecipeSerializer(serializers.ModelSerializer):
         return title
     
     def validate(self, attrs):
+        if self.instance is not None and attrs.get('title') is None:
+            attrs['title'] = self.instance.title
+        if self.instance is not None and attrs.get('description') is None:
+            attrs['description'] = self.instance.description
+
         super_validate = super().validate(attrs)
         cd = attrs
         _my_errors = defaultdict(list)
