@@ -5,10 +5,9 @@ from collections import defaultdict
 class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model=Recipe
-        fields=('id','title','description','author','is_published','category','preparation_time',\
+        fields=('id','title','description','author','is_published','preparation_time',\
                 'preparation_time_unit','servings','servings_unit','preparation_steps')
 
-    category = serializers.StringRelatedField()
 
     def validate_title(self, value):
         title = value

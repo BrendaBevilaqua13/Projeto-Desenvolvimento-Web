@@ -6,7 +6,7 @@ class RecipeAdmin(admin.ModelAdmin):
     list_display = ['id','title','created_at','is_published', 'author']
     list_display_links = ['title','created_at']
     search_fields = ['id','title','description','slug','preparation_steps']
-    list_filter = ['category','author','is_published']
+    list_filter = ['author','is_published']
     list_editable = ['is_published']
     ordering = ['-id']
 
