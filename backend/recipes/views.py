@@ -1,7 +1,6 @@
 from rest_framework.response import Response
 from .serializers import RecipeSerializer
 from django.shortcuts import get_object_or_404
-from django.template.defaultfilters import slugify
 from rest_framework.views import APIView 
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -20,7 +19,6 @@ class RecipeListView(APIView):
         serializer = RecipeSerializer(data=request.data)
         print(request.data)
         serializer.is_valid(raise_exception=True)
-        print(serializer)
         serializer.save(
             author_id=request.user.id
         )
